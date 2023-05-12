@@ -1,12 +1,13 @@
-function Hello(props) {
-    return <div>
-        <p>Имя: {props.name}</p>
-        <p>Возраст: {props.age}</p>
-    </div>;
+function ClickButton(props) {
+
+    function press() {
+        alert("Hello React!")
+    }
+    return <button onClick={press}>Click</button>;
 }
 ReactDOM.createRoot(
     document.getElementById("app")
 )
     .render(
-        <Hello name="Tom" age="33" />
+        <ClickButton />
     );
