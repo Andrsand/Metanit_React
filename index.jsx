@@ -1,16 +1,18 @@
-function ClickButton(props) {
+function PrintButton(props) {
 
-    function press(e) {
-        console.log(e); // выводим информацию о событии
-        alert("Hello React!")
+    function print(name, age) {
+        console.log(`Name ${name}  Age: ${age}`);
     }
 
-    return <button onClick={press}>Click</button>;
+    return <div>
+        <button onClick={() => print("Bob", 23)}>Print Bob</button>
+        <button onClick={() => print("Tom", 36)}>Print Tom</button>
+    </div>;
 }
 ReactDOM.createRoot(
     document.getElementById("app")
 )
     .render(
-        <ClickButton />
+        <PrintButton />
     );
 

@@ -1,10 +1,11 @@
-function ClickButton(props) {
-  function press(e) {
-    console.log(e); // выводим информацию о событии
-    alert("Hello React!");
+function PrintButton(props) {
+  function print(name, age) {
+    console.log(`Name ${name}  Age: ${age}`);
   }
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: press
-  }, "Click");
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+    onClick: () => print("Bob", 23)
+  }, "Print Bob"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => print("Tom", 36)
+  }, "Print Tom"));
 }
-ReactDOM.createRoot(document.getElementById("app")).render( /*#__PURE__*/React.createElement(ClickButton, null));
+ReactDOM.createRoot(document.getElementById("app")).render( /*#__PURE__*/React.createElement(PrintButton, null));
