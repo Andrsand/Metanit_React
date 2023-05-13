@@ -1,5 +1,6 @@
 function ClickButton(props) {
-  function press() {
+  function press(e) {
+    console.log(e); // выводим информацию о событии
     alert("Hello React!");
   }
   return /*#__PURE__*/React.createElement("button", {
