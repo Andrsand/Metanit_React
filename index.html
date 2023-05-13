@@ -3,25 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Hello React</title>
-    <style>
-        button {
-            width: 100px;
-            height: 30px;
-            border-radius: 4px;
-            margin: 50px;
-        }
-
-        .on {
-            color: #666;
-            background-color: #ccc;
-        }
-
-        .off {
-            color: #888;
-            background-color: white;
-        }
-    </style>
+    <title>METANIT.COM</title>
 </head>
 
 <body>
@@ -32,27 +14,29 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         class ClickButton extends React.Component {
-             
-           constructor(props) {
-               super(props);
-               this.state = {class: "off", label: "Нажми"};
-                 
-               this.press = this.press.bind(this);
-           }
-           press(){
-               let className = (this.state.class==="off")?"on":"off";
-               this.setState({class: className});
-           }
-           render() {
-               return <button onClick={this.press} className={this.state.class}>{this.state.label}</button>;
-           }
-       }
+
+            constructor (props) {
+                super(props);
+                this.state = { counter: 0 };
+                this.press = this.press.bind(this);
+            }
+            press() {
+                this.setState({ counter: this.state.counter + parseInt(this.props.increment) });
+                this.setState({ counter: this.state.counter + parseInt(this.props.increment) });
+            }
+            render() {
+                return <div>
+                    <button onClick={this.press}>Count</button>
+                    <div>Counter: {this.state.counter} <br />Increment: {this.props.increment}</div>
+                </div>
+            }
+        }
         ReactDOM.createRoot(
             document.getElementById("app")
         )
-        .render(
-            <ClickButton />
-        );
+            .render(
+                <ClickButton increment="1" />
+            );
     </script>
 </body>
 
