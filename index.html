@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>METANIT.COM</title>
+    <title>Формы в React</title>
 </head>
 
 <body>
@@ -12,30 +12,43 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-        class ClickButton extends React.Component {
 
+    <script type="text/babel">
+        class UserForm extends React.Component {
             constructor (props) {
                 super(props);
-                this.state = { counter: 0 };
-                this.press = this.press.bind(this);
+                this.state = { name: "" };
+
+                this.onChange = this.onChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
             }
-            press() {
-                this.setState({ counter: this.state.counter + parseInt(this.props.increment) });
-                this.setState({ counter: this.state.counter + parseInt(this.props.increment) });
+            onChange(e) {
+                var val = e.target.value;
+                this.setState({ name: val });
             }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                alert("Имя: " + this.state.name);
+            }
+
             render() {
-                return <div>
-                    <button onClick={this.press}>Count</button>
-                    <div>Counter: {this.state.counter} <br />Increment: {this.props.increment}</div>
-                </div>
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <p>
+                            <label>Имя:</label><br />
+                            <input type="text" value={this.state.name} onChange={this.onChange} />
+                        </p>
+                        <input type="submit" value="Отправить" />
+                    </form>
+                );
             }
         }
         ReactDOM.createRoot(
             document.getElementById("app")
         )
             .render(
-                <ClickButton increment="1" />
+                <UserForm />
             );
     </script>
 </body>
