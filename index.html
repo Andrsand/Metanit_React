@@ -13,22 +13,24 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        function ClickButtonHook(props) {
-            const [count, setCount] = React.useState(0); // определяем переменные состояния. 0 - это то значение, которое по умолчанию получает переменная count
-            const press = function () {
-                setCount(count + props.increment);
-            };
-            return (<div>
-                <button onClick={press}>Count</button>
-                <div>Counter: {count}<br /> Increment: {props.increment}</div>
-            </div>);
+
+        function Counter() {
+            const [count, setCount] = React.useState(0);
+            return (
+                <div>
+                    <h3>Count = {count}</h3>
+                    <button onClick={() => setCount(count + 1)}>
+                        Увеличить
+                    </button>
+                </div>
+            );
         }
 
         ReactDOM.createRoot(
             document.getElementById("app")
         )
             .render(
-                <ClickButtonHook increment={2} />
+                <Counter />
             )
     </script>
 </body>
