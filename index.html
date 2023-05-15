@@ -14,14 +14,26 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
 
-        function Counter() {
-            const [count, setCount] = React.useState(0);
+        function User() {
+            const [name, setName] = React.useState("Tom");
+            const [age, setAge] = React.useState(36);
+
+            function handleNameChange(event) {
+                setName(event.target.value);
+            }
+
+            function handleAgeChange(event) {
+                setAge(event.target.value);
+            }
             return (
                 <div>
-                    <h3>Count = {count}</h3>
-                    <button onClick={() => setCount(count + 1)}>
-                        Увеличить
-                    </button>
+                    <h3>Имя: {name}</h3>
+                    <h3>Возраст: {age}</h3>
+
+                    <div>
+                        <p>Имя: <input type="text" value={name} onChange={handleNameChange} /></p>
+                        <p>Возраст: <input type="number" min="0" max="110" value={age} onChange={handleAgeChange} /></p>
+                    </div>
                 </div>
             );
         }
@@ -30,8 +42,8 @@
             document.getElementById("app")
         )
             .render(
-                <Counter />
-            )
+                <User />
+            );
     </script>
 </body>
 
