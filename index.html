@@ -12,48 +12,45 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/history@5/umd/history.production.min.js" crossorigin></script>
+
     <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.production.min.js" crossorigin></script>
+
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
         const Router = ReactRouterDOM.BrowserRouter;
         const Route = ReactRouterDOM.Route;
         const Routes = ReactRouterDOM.Routes;
-        const Outlet = ReactRouterDOM.Outlet;
+        const Link = ReactRouterDOM.Link;
 
-        class Phone extends React.Component {
-            render() {
-                return <h3>Смартфоны</h3>;
-            }
+        function Home() { return <h2>Главная</h2>; }
+        function About() { return <h2>О сайте</h2>; }
+        function NotFound() { return <h2>Ресурс не найден</h2>; }
+        function Products() {
+            return <div>
+                <h2>Товары</h2>
+            </div>;
         }
-        class Tablet extends React.Component {
-            render() {
-                return <h3>Планшеты</h3>;
-            }
-        }
-        class Products extends React.Component {
-            render() {
-                return <div>
-                    <h2>Товары</h2>
-                    <Outlet />
-                </div>;
-            }
+        function Nav() {
+            return <nav>
+                <Link to="/">Главная</Link> {" "}
+                <Link to="/about">О сайте</Link> {" "}
+                <Link to="/products">Товары</Link>
+            </nav>;
         }
         ReactDOM.createRoot(
             document.getElementById("app")
         )
             .render(
-               <Router>
+                <Router>
                     <div>
+                        <Nav />
                         <Routes>
-                            <Route path="/" element={<h2>Главная</h2>} />
-                            <Route path="/products" element={<Products />}>
-                                <Route index element={<h3>Каталог товаров</h3>} />
-                                <Route path="phones" element={<Phone />} />
-                                <Route path="tablets" element={<Tablet />} />
-                            </Route>
-                            <Route path="*" element={<h2>Ресурс не найден</h2>} />
+                            <Route path="/" element={<Home />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/products" element={<Products />} />
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>
                 </Router>
