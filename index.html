@@ -44,11 +44,12 @@
             document.getElementById("app")
         )
             .render(
-                <Router>
+               <Router>
                     <div>
                         <Routes>
                             <Route path="/" element={<h2>Главная</h2>} />
                             <Route path="/products" element={<Products />}>
+                                <Route index element={<h3>Каталог товаров</h3>} />
                                 <Route path="phones" element={<Phone />} />
                                 <Route path="tablets" element={<Tablet />} />
                             </Route>
