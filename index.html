@@ -4,6 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <title>Маршруты в React</title>
+    <style>
+        a {
+            margin: 5px;
+        }
+
+        .active {
+            background-color: #486ca3;
+            color: #fff;
+            padding: 6px;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,7 +33,7 @@
         const Router = ReactRouterDOM.BrowserRouter;
         const Route = ReactRouterDOM.Route;
         const Routes = ReactRouterDOM.Routes;
-        const Link = ReactRouterDOM.Link;
+        const NavLink = ReactRouterDOM.NavLink;
 
         function Home() { return <h2>Главная</h2>; }
         function About() { return <h2>О сайте</h2>; }
@@ -34,9 +45,9 @@
         }
         function Nav() {
             return <nav>
-                <Link to="/">Главная</Link> {" "}
-                <Link to="/about">О сайте</Link> {" "}
-                <Link to="/products">Товары</Link>
+                <NavLink to="/" className={({ isActive }) => (isActive ? " active" : "")}>Главная</NavLink>
+                <NavLink to="/about" className={({ isActive }) => (isActive ? " active" : "")}>О сайте</NavLink>
+                <NavLink to="/products" className={({ isActive }) => (isActive ? " active" : "")}>Товары</NavLink>
             </nav>;
         }
         ReactDOM.createRoot(
