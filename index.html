@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8" />
-    <title>METANIT.COM</title>
+    <title>Маршруты в React</title>
 </head>
 
 <body>
@@ -12,37 +11,48 @@
 
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.production.min.js" crossorigin></script>
+
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.production.min.js" crossorigin></script>
+
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <script type="text/babel">
+        //  определены три объекта из модуля react-router-dom
+        const Router = ReactRouterDOM.BrowserRouter; // определяет набор маршрутов и, когда к приложению, приходит запрос, то Router выполняет сопоставление запроса с маршрутами. И если какой-то маршрут совпадает с URL запроса, то этот маршрут выбирается для обработки запроса
+        const Route = ReactRouterDOM.Route; // Каждый маршрут представляет объект Route. Он имеет ряд атрибутов, напр. здесь - path и element
+        const Routes = ReactRouterDOM.Routes; // содержит набор маршрутов и позволяет выбрать первый попавшийся маршрут и его использовать для обработки.
 
-        function UserData() {
-            const [user, setUser] = React.useState({ name: "Tom", age: 36 });
-
-            function handleNameChange(event) {
-                setUser({ ...user, name: event.target.value });
+        class About extends React.Component {
+            render() {
+                return <h2>О сайте</h2>;
             }
-
-            function handleAgeChange(event) {
-                setUser({ ...user, age: event.target.value });
+        }
+        class NotFound extends React.Component {
+            render() {
+                return <h2>Ресурс не найден</h2>;
             }
-            return (
-                <div>
-                    <h3>Имя: {user.name}</h3>
-                    <h3>Возраст: {user.age}</h3>
-
-                    <div>
-                        <p>Имя: <input type="text" value={user.name} onChange={handleNameChange} /></p>
-                        <p>Возраст: <input type="number" min="0" max="110" value={user.age} onChange={handleAgeChange} /></p>
-                    </div>
-                </div>
-            );
         }
 
+        class Main extends React.Component {
+            render() {
+                return <h2>Главная</h2>;
+            }
+        }
         ReactDOM.createRoot(
             document.getElementById("app")
         )
             .render(
-                <UserData />
+                <Router>
+                    <div>
+                        <Routes>
+                            <Route path="/" element={<Main />} /> {/* path: шаблон адреса, с которым будет сопоставляться запрошенный адрес URL, element - тот компонент, который отвечает за обработку запроса по этому маршруту*/}
+                            <Route path="/about" element={<About />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </div>
+                </Router>
             );
     </script>
 </body>
