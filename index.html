@@ -15,22 +15,32 @@
     <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <script type="text/babel">
         const Router = ReactRouterDOM.BrowserRouter;
         const Route = ReactRouterDOM.Route;
         const Routes = ReactRouterDOM.Routes;
 
-        function Phone() { return <h3>Смартфоны</h3>; }
-        function Tablet() { return <h3>Планшеты</h3>; }
-
-        function Products() {
-            return <div>
-                <h2>Товары</h2>
-                <Routes>
-                    <Route path="/phones" element={<Phone />} />
-                    <Route path="/tablets" element={<Tablet />} />
-                </Routes>
-            </div>;
+        class Phone extends React.Component {
+            render() {
+                return <h3>Смартфоны</h3>;
+            }
+        }
+        class Tablet extends React.Component {
+            render() {
+                return <h3>Планшеты</h3>;
+            }
+        }
+        class Products extends React.Component {
+            render() {
+                return <div>
+                    <h2>Товары</h2>
+                    <Routes>
+                        <Route path="/phones" element={<Phone />} />
+                        <Route path="/tablets" element={<Tablet />} />
+                    </Routes>
+                </div>;
+            }
         }
         ReactDOM.createRoot(
             document.getElementById("app")
