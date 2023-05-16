@@ -12,33 +12,25 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/history@5/umd/history.production.min.js" crossorigin></script>
-
     <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.production.min.js" crossorigin></script>
-
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
     <script type="text/babel">
-        //  определены три объекта из модуля react-router-dom
-        const Router = ReactRouterDOM.BrowserRouter; // определяет набор маршрутов и, когда к приложению, приходит запрос, то Router выполняет сопоставление запроса с маршрутами. И если какой-то маршрут совпадает с URL запроса, то этот маршрут выбирается для обработки запроса
-        const Route = ReactRouterDOM.Route; // Каждый маршрут представляет объект Route. Он имеет ряд атрибутов, напр. здесь - path и element
-        const Routes = ReactRouterDOM.Routes; // содержит набор маршрутов и позволяет выбрать первый попавшийся маршрут и его использовать для обработки.
+        const Router = ReactRouterDOM.BrowserRouter;
+        const Route = ReactRouterDOM.Route;
+        const Routes = ReactRouterDOM.Routes;
 
-        class About extends React.Component {
-            render() {
-                return <h2>О сайте</h2>;
-            }
-        }
-        class NotFound extends React.Component {
-            render() {
-                return <h2>Ресурс не найден</h2>;
-            }
-        }
+        function Phone() { return <h3>Смартфоны</h3>; }
+        function Tablet() { return <h3>Планшеты</h3>; }
 
-        class Main extends React.Component {
-            render() {
-                return <h2>Главная</h2>;
-            }
+        function Products() {
+            return <div>
+                <h2>Товары</h2>
+                <Routes>
+                    <Route path="/phones" element={<Phone />} />
+                    <Route path="/tablets" element={<Tablet />} />
+                </Routes>
+            </div>;
         }
         ReactDOM.createRoot(
             document.getElementById("app")
@@ -47,9 +39,9 @@
                 <Router>
                     <div>
                         <Routes>
-                            <Route path="/" element={<Main />} /> {/* path: шаблон адреса, с которым будет сопоставляться запрошенный адрес URL, element - тот компонент, который отвечает за обработку запроса по этому маршруту*/}
-                            <Route path="/about" element={<About />} />
-                            <Route path="*" element={<NotFound />} />
+                            <Route path="/" element={<h2>Главная</h2>} />
+                            <Route path="/products/*" element={<Products />} />
+                            <Route path="*" element={<h2>Ресурс не найден</h2>} />
                         </Routes>
                     </div>
                 </Router>
